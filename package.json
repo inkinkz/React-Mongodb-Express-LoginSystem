@@ -1,0 +1,37 @@
+{
+  "name": "react-fancyapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inkinkz/react-fancyapp.git"
+  },
+  "author": "Inkz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inkinkz/react-fancyapp/issues"
+  },
+  "homepage": "https://github.com/inkinkz/react-fancyapp#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "~1.18.3",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "express-messages": "*",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
+    "http-errors": "~1.6.2",
+    "mongodb": "*",
+    "mongoose": "*",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-http": "*",
+    "passport-local": "^1.0.0"
+  }
+}
