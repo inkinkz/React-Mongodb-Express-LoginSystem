@@ -2,9 +2,10 @@
   "name": "react-fancyapp",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "^1.9.1",
+    "nodemon": "^1.18.9",
     "passport": "^0.4.0",
     "passport-http": "*",
     "passport-local": "^1.0.0"
