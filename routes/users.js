@@ -1,112 +1,92 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var User = require('../models/user');
+const express = require("express");
+const users = express.Router();
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
-/* GET users listing. */
-// router.get('/', function (req, res, next) {
-//   res.redirect('/users/login');
-// });
+const User = require("../models/User");
+users.use(cors());
 
-// router.get('/login', function (req, res, next) {
-//   res.render('login', {
-//     title: 'Login'
-//   });
-// });
+process.env.SECRET_KEY = "secret";
 
-// router.get('/register', function (req, res, next) {
-//   res.render('register', {
-//     title: 'Register'
-//   });
-// });
+users.post("/register", (req, res) => {
+  const userData = {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  };
 
-// Register Button 
-router.post('/register', function (req, res, next) {
-  var name = req.body.name;
-  var email = req.body.email;
-  var password = req.body.password;
-  var password2 = req.body.password2;
-
-  // Check if email is valid, passwords are matched
-  req.checkBody('email', 'Email is not valid').isEmail();
-  req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-
-  // Check Errors
-  var errors = req.validationErrors();
-  if (errors) {
-    res.render('register', {
-      errors: errors
-    });
-  } else {
-    // Create new user 
-    var newUser = new User({
-      name: name,
-      email: email,
-      password: password,
-    });
-    // Add new user to database
-    User.createUser(newUser, function (err, user) {
-      if (err) throw err;
-      //log new created user to console
-      console.log(user);
-    });
-
-    req.flash('success', 'Registered successfully');
-
-    res.redirect('/users/login');
-  }
-});
-
-// Login Button
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/users/login',
-    failureFlash: "Incorrect Email or Password!"
-  }),
-  function (req, res) {
-
-  });
-
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-  User.getUserById(id, function (err, user) {
-    done(err, user);
-  });
-});
-
-// Authenticate the user
-passport.use(new LocalStrategy(function (email, password, done) {
-  User.getUserByEmail(email, function (err, user) {
-    if (err) throw err;
-    if (!user) {
-      console.log('unknown user');
-      return done(null, false, {
-        message: 'Incorrect Email!'
-      });
-    }
-    User.comparePassword(password, user.password, function (err, isMatch) {
-      if (err) return done(err);
-      if (isMatch) {
-        return done(null, user);
-      } else {
-        console.log('incorrect password');
-        return done(null, false, {
-          message: 'Incorrect Password!'
+  User.findOne({
+    email: req.body.email
+  })
+    .then(user => {
+      if (!user) {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+          userData.password = hash;
+          User.create(userData)
+            .then(user => {
+              res.json({ status: user.email + " registered!" });
+            })
+            .catch(err => {
+              res.send("error: " + err);
+            });
         });
+      } else {
+        res.json({ error: "User already exists" });
       }
+    })
+    .catch(err => {
+      res.send("error: " + err);
     });
-  });
-}));
-
-// Logout
-router.get('/logout', function (req, res) {
-  req.logout();
-  req.flash('success', 'You are now logged out');
-  res.redirect('/users/login');
 });
 
-module.exports = router;
+users.post("/login", (req, res) => {
+  User.findOne({
+    email: req.body.email
+  })
+    .then(user => {
+      if (user) {
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+          const payload = {
+            name: user.name,
+            email: user.email
+          };
+          let token = jwt.sign(payload, process.env.SECRET_KEY, {
+            expiresIn: 1440
+          });
+          res.send(token);
+          console.log("loggedin");
+        } else {
+          res.json({ error: "User does not exist" });
+        }
+      } else {
+        res.json({ error: "User does not exist" });
+      }
+    })
+    .catch(err => {
+      res.send("error: " + err);
+    });
+});
+
+// users.get("/profile", (req, res) => {
+//   var decoded = jwt.verify(
+//     req.headers["authorization"],
+//     process.env.SECRET_KEY
+//   );
+
+//   User.findOne({
+//     _id: decoded._id
+//   })
+//     .then(user => {
+//       if (user) {
+//         res.json(user);
+//       } else {
+//         res.send("User does not exist");
+//       }
+//     })
+//     .catch(err => {
+//       res.send("error: " + err);
+//     });
+// });
+
+module.exports = users;

@@ -7,7 +7,7 @@
   height: 40vmin;
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -16,7 +16,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;
@@ -26,7 +26,150 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
+/* Font */
+.font-mukta {
+  font-family: "Mukta", sans-serif;
+  line-height: 170%;
+}
+
+body {
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  margin: 30px;
+  margin-left: 120px;
+  margin-right: 120px;
+  background: #ffffff;
+}
+
+a {
+  color: #00b7ff;
+}
+
+button:disabled,
+button[disabled] {
+  background-color: #cccccc;
+  color: #666666;
+}
+
+/* Nav Bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: burlywood;
+  position: sticky;
+  top: 0;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li b {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  transition-duration: 0.9s;
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 4px;
+}
+
+.active {
+  background-color: peru;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="password"],
+input[type="name"] {
+  width: 70%;
+  padding: 16px;
+  margin: 5px 0 22px 0;
+  font-size: 16px;
+  display: inline-block;
+  border: none;
+  background: #e0d8c9;
+  border-radius: 12px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input [type="name"]:focus {
+  background-color: #ccc4b5;
+  outline: none;
+}
+
+/* button style*/
+.registerbtn {
+  background-color: peru;
+  color: white;
+  padding: 18px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+.errorMessage {
+  /* border: 5px solid red; */
+  font-size: 14px;
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+/* .registerbtn:hover {
+  background-color: rgb(199, 162, 80);
+} */
+
+/* .error-alert {
+  background-color: antiquewhite;
+  font-size: 20px;
+  color: rgb(133, 110, 53);
+  width: 70%;
+  border-radius: 6px;
+} */
+
+/* Selector */
+/* select {
+  width: 15%;
+  padding: 16px;
+  margin: 5px 0 22px 0;
+  font-size: 14px;
+  display: inline-block;
+  border: none;
+  background: #e0d8c9;
+  border-radius: 12px;
+} */
