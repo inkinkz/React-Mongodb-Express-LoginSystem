@@ -8,7 +8,12 @@ export const register = newUser => {
       password: newUser.password
     })
     .then(res => {
-      console.log("Registered Successfully!");
+      console.log(res.data.error);
+      if (res.data.error !== "User already exists") {
+        this.push("/users/login");
+      } else {
+        this.push("/users/profile");
+      }
     });
 };
 

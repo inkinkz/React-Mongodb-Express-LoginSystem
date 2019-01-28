@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { register } from "./UserFunctions";
-import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 class Register extends Component {
   isEnabled = false;
+  userExisted = false;
+
+  emailError = false;
+  pwError = false;
 
   constructor() {
     super();
@@ -11,9 +14,7 @@ class Register extends Component {
       name: "",
       email: "",
       password: "",
-      password2: "",
-      emailerror: false,
-      pwerror: false
+      password2: ""
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -29,9 +30,9 @@ class Register extends Component {
           )
         ) {
           console.log("Invalid Email");
-          this.state.emailerror = true;
+          this.emailError = true;
         } else {
-          this.state.emailerror = false;
+          this.emailError = false;
         }
         break;
       case "password2":
@@ -40,20 +41,25 @@ class Register extends Component {
           console.log(
             `pw = ${this.state.password} pw2 = ${event.target.value}`
           );
-          this.state.pwerror = true;
+          this.pwError = true;
         } else {
-          this.state.pwerror = false;
+          this.pwError = false;
         }
         break;
       default:
         break;
     }
+    this.checkState();
+  }
+
+  checkState() {
+    console.log("state checked");
     if (
       this.state.name !== "" &&
       this.state.password2 !== "" &&
       this.state.email !== "" &&
-      !this.state.emailerror &&
-      !this.state.pwerror
+      !this.emailError &&
+      !this.pwError
     ) {
       this.isEnabled = true;
     } else {
@@ -69,9 +75,20 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    register(user).then(res => {
-      this.props.history.push("/users/login");
-    });
+    axios
+      .post("register", {
+        name: user.name,
+        email: user.email,
+        password: user.password
+      })
+      .then(res => {
+        console.log(res.data.error);
+        if (res.data.error !== "User already exists") {
+          this.props.history.push("/users/login");
+        } else {
+          this.userExisted = true;
+        }
+      });
   }
 
   render() {
@@ -79,6 +96,9 @@ class Register extends Component {
       <div className="container">
         <form onSubmit={this.onSubmit}>
           <div>
+            <p className={`${!this.userExisted ? "hidden" : ""}`}>
+              ERROR: User existed !
+            </p>
             <h1 className="font-mukta">Register</h1>
             <p className="font-mukta">Fill the form below to register.</p>
             <label htmlFor="name">

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { login } from "./Functions";
+import { login } from "./UserFunctions";
 
 class Login extends Component {
   constructor() {
