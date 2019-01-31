@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { login } from "./UserFunctions";
+import axios from "axios";
 
 class Login extends Component {
+  failed = false;
   constructor() {
     super();
     this.state = {
@@ -24,18 +25,35 @@ class Login extends Component {
       password: this.state.password
     };
 
-    login(user).then(res => {
-      console.log("log ed in");
-      if (res) {
-        this.props.history.push(`/profile`);
-      }
-    });
+    axios
+      .post("login", {
+        email: user.email,
+        password: user.password
+      })
+      .then(res => {
+        if (!(res.data.error === "incorrect")) {
+          localStorage.setItem("usertoken", res.data);
+          this.props.history.push("/users/member");
+          console.log("logged in");
+          // return res.data;
+        } else {
+          console.log(res.data.error);
+          this.failed = true;
+          this.props.history.push("/users/login");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
     return (
       <form onSubmit={this.onSubmit}>
         <div className="container">
+          <p className={`errorMessage ${!this.failed ? "hidden" : ""}`}>
+            Incorrect email or password!
+          </p>
           <h1 className="font-mukta">Login</h1>
           <p className="font-mukta">Enter your Email and Password</p>
           <label htmlFor="email">

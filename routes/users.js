@@ -55,12 +55,13 @@ users.post("/login", (req, res) => {
             expiresIn: 1440
           });
           res.send(token);
-          console.log("loggedin");
         } else {
-          res.json({ error: "User does not exist" });
+          res.json({ error: "incorrect password" });
+          res.send("error: incorrect");
         }
       } else {
-        res.json({ error: "User does not exist" });
+        res.json({ error: "user does not exist" });
+        res.send("error: incorrect");
       }
     })
     .catch(err => {

@@ -26,7 +26,7 @@ class Register extends Component {
       case "email":
         if (
           !event.target.value.match(
-            /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+            /[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/
           )
         ) {
           console.log("Invalid Email");
@@ -53,7 +53,7 @@ class Register extends Component {
   }
 
   checkState() {
-    console.log("state checked");
+    // console.log("state checked");
     if (
       this.state.name !== "" &&
       this.state.password2 !== "" &&
@@ -72,7 +72,7 @@ class Register extends Component {
 
     const user = {
       name: this.state.name,
-      email: this.state.email,
+      email: this.state.email.toLowerCase(),
       password: this.state.password
     };
     axios
@@ -83,10 +83,11 @@ class Register extends Component {
       })
       .then(res => {
         console.log(res.data.error);
-        if (res.data.error !== "User already exists") {
-          this.props.history.push("/users/login");
-        } else {
+        if (res.data.error === "User already exists") {
           this.userExisted = true;
+          this.props.history.push("/users/register");
+        } else {
+          this.props.history.push("/users/login");
         }
       });
   }
@@ -96,7 +97,7 @@ class Register extends Component {
       <div className="container">
         <form onSubmit={this.onSubmit}>
           <div>
-            <p className={`${!this.userExisted ? "hidden" : ""}`}>
+            <p className={`errorMessage ${!this.userExisted ? "hidden" : ""}`}>
               ERROR: User existed !
             </p>
             <h1 className="font-mukta">Register</h1>
@@ -121,9 +122,7 @@ class Register extends Component {
             <div>
               <p
                 id="emailError"
-                className={`errorMessage ${
-                  !this.state.emailerror ? "hidden" : ""
-                }`}
+                className={`errorMessage ${!this.emailError ? "hidden" : ""}`}
               >
                 Please enter a valid email address.
               </p>
@@ -157,9 +156,7 @@ class Register extends Component {
             <div>
               <p
                 id="pwError"
-                className={`errorMessage ${
-                  !this.state.pwerror ? "hidden" : ""
-                }`}
+                className={`errorMessage ${!this.pwError ? "hidden" : ""}`}
               >
                 Passwords not match.
               </p>
