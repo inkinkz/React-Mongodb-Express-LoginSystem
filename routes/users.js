@@ -1,14 +1,18 @@
 const express = require("express");
 const users = express.Router();
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+
+//Passport
+var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
 
 const User = require("../models/User");
 users.use(cors());
 
 process.env.SECRET_KEY = "secret";
 
+//Register new user
 users.post("/register", (req, res) => {
   const userData = {
     name: req.body.name,
@@ -40,54 +44,94 @@ users.post("/register", (req, res) => {
     });
 });
 
-users.post("/login", (req, res) => {
-  User.findOne({
-    email: req.body.email
-  })
-    .then(user => {
-      if (user) {
-        if (bcrypt.compareSync(req.body.password, user.password)) {
-          const payload = {
-            name: user.name,
-            email: user.email
-          };
-          let token = jwt.sign(payload, process.env.SECRET_KEY, {
-            expiresIn: 1440
-          });
-          res.send(token);
-        } else {
-          res.json({ error: "incorrect password" });
-          res.send("error: incorrect");
-        }
-      } else {
-        res.json({ error: "user does not exist" });
-        res.send("error: incorrect");
-      }
-    })
-    .catch(err => {
-      res.send("error: " + err);
-    });
+// Login Button
+users.post("/login", passport.authenticate("local"), function(req, res) {
+  console.log("done called");
+  res.send(req.user);
 });
 
-// users.get("/profile", (req, res) => {
-//   var decoded = jwt.verify(
-//     req.headers["authorization"],
-//     process.env.SECRET_KEY
-//   );
+passport.serializeUser(function(user, done) {
+  console.log("*** SerializeUser called, user: ");
+  console.log(user);
+  console.log("---------");
+  done(null, user.id);
+});
 
-//   User.findOne({
-//     _id: decoded._id
-//   })
-//     .then(user => {
-//       if (user) {
-//         res.json(user);
-//       } else {
-//         res.send("User does not exist");
-//       }
-//     })
-//     .catch(err => {
-//       res.send("error: " + err);
-//     });
-// });
+passport.deserializeUser(function(id, done) {
+  console.log("DeserializeUser called");
+  User.getUserById(id, function(err, user) {
+    console.log("*** Deserialize user, user:");
+    console.log(user);
+    console.log("--------------");
+    done(err, user);
+  });
+});
+
+// Authenticate the user
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email", passwordField: "password" },
+    function(email, password, done) {
+      User.getUserByEmail(email, function(err, user) {
+        if (err) throw err;
+        if (!user) {
+          console.log("unknown user");
+          // res.send("error: incorrect");
+          return done(null, false, { message: "Incorrect Email!" });
+        }
+        User.comparePassword(password, user.password, function(err, isMatch) {
+          if (err) return done(err);
+          if (isMatch) {
+            // console.log("session:" + user);
+            return done(null, user);
+          } else {
+            console.log("incorrect password");
+            // res.send("error: incorrect");
+            return done(null, false, { message: "Incorrect Password!" });
+          }
+        });
+      });
+    }
+  )
+);
+
+users.post("/member", function(req, res) {
+  console.log(req.body.type);
+  if (req.body.type === "delete") {
+    console.log("delete called");
+    User.deleteAccount(req.user); // Delete account from database using its id
+    req.logout();
+    res.send("deleted");
+  } else if (req.body.type === "changePassword") {
+    console.log("CHANGE PASSWORD");
+    var currentPassword = req.body.currentPassword;
+
+    var newPassword = req.body.password;
+
+    console.log("currentereqrqepas = " + req.user.password);
+    console.log("currentpw =" + currentPassword);
+    console.log("newp = " + newPassword);
+
+    User.comparePassword(currentPassword, req.user.password, function(
+      err,
+      isMatch
+    ) {
+      if (err) throw err;
+
+      // Current password matched
+      if (isMatch) {
+        User.changePassword(req.user, newPassword, function(err) {
+          if (err) throw err;
+        });
+
+        res.send("password changed");
+
+        // Current password incorrect
+      } else {
+        res.send("current password not matched");
+      }
+    });
+  }
+});
 
 module.exports = users;

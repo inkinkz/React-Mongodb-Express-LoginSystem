@@ -1,28 +1,26 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 
 class Navbar extends Component {
   logOut(e) {
     e.preventDefault();
-    localStorage.removeItem("usertoken");
+    sessionStorage.clear();
     this.props.history.push(`/`);
+    console.log("logged out");
   }
   render() {
     var loggedIn = <li />;
-    if (localStorage.getItem("usertoken") !== null) {
+    if (sessionStorage.getItem("name") !== null) {
       loggedIn = (
         <div>
           <li>
-            <Link to="#">{`Hi, ${
-              jwt_decode(localStorage.usertoken).name
-            }`}</Link>
+            <Link to="#">{`Hi, ${sessionStorage.getItem("name")}`}</Link>
           </li>
           <li>
             <Link to="/users/member">Member</Link>
           </li>
-          <li>
-            <a onClick={this.logOut.bind(this)}>Logout</a>
+          <li onClick={this.logOut.bind(this)}>
+            <Link to="#">Logout</Link>
           </li>
         </div>
       );
@@ -45,13 +43,7 @@ class Navbar extends Component {
           <li className="active">
             <Link to="/">Fancy App</Link>
           </li>
-          {localStorage.usertoken ? loggedIn : loginRegLink}
-          {/* {loginRegLink}
-          <li>
-            <a href="" onClick={this.logOut.bind(this)}>
-              Logout
-            </a>
-          </li> */}
+          {sessionStorage.name ? loggedIn : loginRegLink}
         </ul>
       </div>
     );

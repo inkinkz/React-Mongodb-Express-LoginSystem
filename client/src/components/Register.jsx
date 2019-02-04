@@ -46,6 +46,17 @@ class Register extends Component {
           this.pwError = false;
         }
         break;
+      case "password":
+        if (this.state.password2 !== event.target.value) {
+          console.log("passwords not matched!");
+          console.log(
+            `pw = ${this.state.password} pw2 = ${event.target.value}`
+          );
+          this.pwError = true;
+        } else {
+          this.pwError = false;
+        }
+        break;
       default:
         break;
     }
