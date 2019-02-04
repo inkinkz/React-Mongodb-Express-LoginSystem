@@ -28,8 +28,6 @@ app.use(
 
 var port = process.env.PORT || 5000;
 
-app.use(cookieParser());
-
 app.use(bodyParser());
 app.use(cors());
 app.use(
