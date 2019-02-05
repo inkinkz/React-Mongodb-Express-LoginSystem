@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { translate } from "react-i18next";
+import { Redirect } from "react-router-dom";
 
 class Member extends Component {
   isMatch = false;
@@ -12,7 +13,8 @@ class Member extends Component {
     this.state = {
       currentPassword: "",
       password: "",
-      password2: ""
+      password2: "",
+      redirect: null
     };
     this.onChange = this.onChange.bind(this);
     this.onDelete = this.onDelete.bind(this);
@@ -21,7 +23,10 @@ class Member extends Component {
 
   componentDidMount() {
     if (sessionStorage.getItem("name") === null) {
-      this.props.history.push("/users/login");
+      // this.props.history.push("/users/login");
+      this.setState({
+        redirect: "/users/login"
+      });
     } else {
       this.setState({
         name: sessionStorage.getItem("name"),
@@ -106,10 +111,10 @@ class Member extends Component {
         console.log(res);
         if (res.data === "deleted") {
           alert("Account Deleted Successfully!");
-          this.props.history.push("/users/member");
-
           sessionStorage.clear();
-          this.props.history.push("/");
+          this.setState({
+            redirect: "/"
+          });
         }
       })
       .catch(err => {
@@ -119,97 +124,101 @@ class Member extends Component {
 
   render() {
     const { t } = this.props;
-    return (
-      <div>
-        <form onSubmit={this.onPasswordChange}>
-          <div className="container">
-            <h1 className="font-mukta">{`${t("GREETING")} ${
-              this.state.name
-            }`}</h1>
-            <h4 className="font-mukta">{`Email: ${this.state.email}`}</h4>
-            <p
-              id="isChanged"
-              className={`errorMessage ${!this.isChanged ? "hidden" : ""}`}
-            >
-              {t("PASSWORD_CHANGED_SUCCESSFULLY")}
-            </p>
-            <p
-              id="notMatched"
-              className={`errorMessage ${!this.notMatched ? "hidden" : ""}`}
-            >
-              {t("INCORRECT_CURRENT_PASSWORD")}
-            </p>
-            <h1 className="font-mukta">{t("CHANGE_PASSWORD")}</h1>
-            <p className="font-mukta">{t("ENTER_NEW_PASSWORD")}.</p>
-            <label htmlFor="currentPassword">
-              <b className="font-mukta">{t("CURRENT_PASSWORD")}</b>
+    if (this.state.redirect) {
+      return <Redirect to={{ pathname: this.state.redirect }} />;
+    } else {
+      return (
+        <div>
+          <form onSubmit={this.onPasswordChange}>
+            <div className="container">
+              <h1 className="font-mukta">{`${t("GREETING")} ${
+                this.state.name
+              }`}</h1>
+              <h4 className="font-mukta">{`Email: ${this.state.email}`}</h4>
+              <p
+                id="isChanged"
+                className={`errorMessage ${!this.isChanged ? "hidden" : ""}`}
+              >
+                {t("PASSWORD_CHANGED_SUCCESSFULLY")}
+              </p>
+              <p
+                id="notMatched"
+                className={`errorMessage ${!this.notMatched ? "hidden" : ""}`}
+              >
+                {t("INCORRECT_CURRENT_PASSWORD")}
+              </p>
+              <h1 className="font-mukta">{t("CHANGE_PASSWORD")}</h1>
+              <p className="font-mukta">{t("ENTER_NEW_PASSWORD")}.</p>
+              <label htmlFor="currentPassword">
+                <b className="font-mukta">{t("CURRENT_PASSWORD")}</b>
+                <br />
+              </label>
+              <input
+                className="font-mukta"
+                type="password"
+                placeholder={t("ENTER_CURRENT_PASSWORD")}
+                name="currentPassword"
+                onChange={this.onChange}
+              />
               <br />
-            </label>
-            <input
-              className="font-mukta"
-              type="password"
-              placeholder={t("ENTER_CURRENT_PASSWORD")}
-              name="currentPassword"
-              onChange={this.onChange}
-            />
-            <br />
-            <label htmlFor="password">
-              <b className="font-mukta">{t("NEW_PASSWORD")}</b>
+              <label htmlFor="password">
+                <b className="font-mukta">{t("NEW_PASSWORD")}</b>
+                <br />
+              </label>
+              <input
+                className="font-mukta"
+                type="password"
+                placeholder={t("ENTER_NEW_PASSWORD")}
+                name="password"
+                onChange={this.onChange}
+              />
               <br />
-            </label>
-            <input
-              className="font-mukta"
-              type="password"
-              placeholder={t("ENTER_NEW_PASSWORD")}
-              name="password"
-              onChange={this.onChange}
-            />
-            <br />
-            <label htmlFor="password2">
-              <b className="font-mukta">{t("ENTER_NEW_PASSWORD")}</b>
+              <label htmlFor="password2">
+                <b className="font-mukta">{t("ENTER_NEW_PASSWORD")}</b>
+                <br />
+              </label>
+              <p
+                id="pwError"
+                className={`errorMessage ${!this.isMatch ? "hidden" : ""}`}
+              >
+                {t("PASSWORDS_NOT_MATCH")}
+              </p>
+              <input
+                className="font-mukta"
+                type="password"
+                placeholder={t("CONFIRM_NEW_PASSWORD")}
+                name="password2"
+                onChange={this.onChange}
+              />
+              <button
+                className="font-mukta registerbtn"
+                type="submit"
+                name="changePw"
+                disabled={!this.isEnabled}
+              >
+                {t("CHANGE_PASSWORD")}
+              </button>
               <br />
-            </label>
-            <p
-              id="pwError"
-              className={`errorMessage ${!this.isMatch ? "hidden" : ""}`}
-            >
-              {t("PASSWORDS_NOT_MATCH")}
-            </p>
-            <input
-              className="font-mukta"
-              type="password"
-              placeholder={t("CONFIRM_NEW_PASSWORD")}
-              name="password2"
-              onChange={this.onChange}
-            />
-            <button
-              className="font-mukta registerbtn"
-              type="submit"
-              name="changePw"
-              disabled={!this.isEnabled}
-            >
-              {t("CHANGE_PASSWORD")}
-            </button>
-            <br />
-            <br />
-            <hr />
-          </div>
-        </form>
-        <form onSubmit={this.onDelete}>
-          <div className="container">
-            <h1 className="font-mukta">{t("DELETE_ACCOUNT")}</h1>
-            <p className="font-mukta">{t("DELETE_ACCOUNT_MESSAGE")} </p>
-            <button
-              className="font-mukta registerbtn"
-              type="submit"
-              name="deleteAcc"
-            >
-              {t("DELETE_ACCOUNT")}
-            </button>
-          </div>
-        </form>
-      </div>
-    );
+              <br />
+              <hr />
+            </div>
+          </form>
+          <form onSubmit={this.onDelete}>
+            <div className="container">
+              <h1 className="font-mukta">{t("DELETE_ACCOUNT")}</h1>
+              <p className="font-mukta">{t("DELETE_ACCOUNT_MESSAGE")} </p>
+              <button
+                className="font-mukta registerbtn"
+                type="submit"
+                name="deleteAcc"
+              >
+                {t("DELETE_ACCOUNT")}
+              </button>
+            </div>
+          </form>
+        </div>
+      );
+    }
   }
 }
 

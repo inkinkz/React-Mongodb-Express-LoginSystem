@@ -10,7 +10,15 @@ class Navbar extends Component {
     console.log("logged out");
   }
   render() {
-    const { t } = this.props;
+    const { t, i18n } = this.props;
+
+    const switchingLanguage = () => {
+      var selectedLanguage = document.getElementById("langselector").value;
+      if (selectedLanguage.length === 2) {
+        i18n.changeLanguage(selectedLanguage);
+        sessionStorage.setItem("selectedLanguage", selectedLanguage);
+      }
+    };
 
     var loggedIn = <li />;
     if (sessionStorage.getItem("name") !== null) {
@@ -49,6 +57,23 @@ class Navbar extends Component {
             <Link to="/">Fancy App</Link>
           </li>
           {sessionStorage.name ? loggedIn : loginRegLink}
+          <select
+            align="center"
+            id="langselector"
+            onChange={() => switchingLanguage(this)}
+          >
+            <option value="" disabled="disabled">
+              Fancy App
+            </option>
+            <option>{t("SELECT_LANGUAGE")}</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="jp">日本語 </option>
+            <option value="ch">中文</option>
+            <option value="kr">한국어</option>
+            <option value="th">ไทย</option>
+          </select>
         </ul>
       </div>
     );

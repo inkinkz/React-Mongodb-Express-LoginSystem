@@ -141,7 +141,7 @@ input [type="name"]:focus {
 }
 
 .errorMessage {
-  font-size: 16px;
+  font-size: 14px;
   color: red;
 }
 
@@ -151,12 +151,13 @@ input [type="name"]:focus {
 
 /* Selector */
 select {
-  width: 30%;
-  padding: 16px;
-  margin: 5px 0 22px 0;
+  width: 15%;
+  /* padding: 16px; */
+  margin: 16px 10px;
+  /* margin: 12px 0 22px 0; */
   font-size: 14px;
-  display: inline-block;
-  border: none;
+  float: right;
+  /* display: inline-block; */
   background: #e0d8c9;
   border-radius: 12px;
 }
