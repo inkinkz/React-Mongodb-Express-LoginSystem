@@ -39,9 +39,9 @@ class Register extends Component {
       case "password2":
         if (this.state.password !== event.target.value) {
           console.log("passwords not matched!");
-          console.log(
-            `pw = ${this.state.password} pw2 = ${event.target.value}`
-          );
+          // console.log(
+          //   `pw = ${this.state.password} pw2 = ${event.target.value}`
+          // );
           this.pwError = true;
         } else {
           this.pwError = false;
@@ -50,9 +50,9 @@ class Register extends Component {
       case "password":
         if (this.state.password2 !== event.target.value) {
           console.log("passwords not matched!");
-          console.log(
-            `pw = ${this.state.password} pw2 = ${event.target.value}`
-          );
+          // console.log(
+          //   `pw = ${this.state.password} pw2 = ${event.target.value}`
+          // );
           this.pwError = true;
         } else {
           this.pwError = false;
@@ -105,7 +105,7 @@ class Register extends Component {
   }
 
   render() {
-    const { t, i18n } = this.props;
+    const { t } = this.props;
 
     return (
       <div className="container">

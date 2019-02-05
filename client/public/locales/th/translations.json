@@ -25,5 +25,12 @@
   "NAME": "ชื่อ",
   "ENTER_NAME": "กรอกชื่อของคุณ",
   "PASSWORD_AGAIN": "กรอกรหัสผ่านอีกครั้ง",
-  "CHANGE_PASSWORD": "เปลี่ยนรหัสผ่าน"
+  "CHANGE_PASSWORD": "เปลี่ยนรหัสผ่าน",
+  "INCORRECT_LOGIN": "อีเมลหรือรหัสผ่านไม่ถูกต้อง​​​!",
+  "USER_EXISTED": "อีเมลถูกใช้ไปแล้ว!",
+  "INVALID_EMAIL": "โปรดระบุอีเมลที่ถูกต้อง",
+  "PASSWORDS_NOT_MATCH": "รหัสผ่านไม่ตรงกัน",
+  "PASSWORD_CHANGED_SUCCESSFULLY": "เปลี่ยนรหัสผ่านเรียบร้อย!",
+  "INCORRECT_CURRENT_PASSWORD": "รหัสผ่านปัจจุบันไม่ถูกต้อง",
+  "SELECT_LANGUAGE": "เลือกภาษา"
 }

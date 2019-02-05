@@ -50,7 +50,7 @@ class Member extends Component {
     if (event.target.name === "password") {
       if (this.state.password2 !== event.target.value) {
         console.log("passwords not matched!");
-        console.log(`pw = ${this.state.password} pw2 = ${event.target.value}`);
+        // console.log(`pw = ${this.state.password} pw2 = ${event.target.value}`);
         this.isMatch = true;
       } else {
         this.isMatch = false;
@@ -118,7 +118,7 @@ class Member extends Component {
   }
 
   render() {
-    const { t, i18n } = this.props;
+    const { t } = this.props;
     return (
       <div>
         <form onSubmit={this.onPasswordChange}>
@@ -131,7 +131,7 @@ class Member extends Component {
               id="isChanged"
               className={`errorMessage ${!this.isChanged ? "hidden" : ""}`}
             >
-              {t("PASSWORDS_CHANGED_SUCCESSFULLY")}
+              {t("PASSWORD_CHANGED_SUCCESSFULLY")}
             </p>
             <p
               id="notMatched"
@@ -204,7 +204,7 @@ class Member extends Component {
               type="submit"
               name="deleteAcc"
             >
-              {t("DELETE_ACCOUNT")}{" "}
+              {t("DELETE_ACCOUNT")}
             </button>
           </div>
         </form>

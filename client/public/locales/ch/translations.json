@@ -26,11 +26,11 @@
   "ENTER_NAME": "輸入你的名字",
   "PASSWORD_AGAIN": "重複輸入密碼",
   "CHANGE_PASSWORD": "更改密碼",
-  "INCORRECT_LOGIN": "Incorrect Email or Password!",
-  "USER_EXISTED": "Email already registered!!",
-  "INVALID_EMAIL": "Please enter a valid email address",
-  "PASSWORDS_NOT_MATCH": "Passwords do not match",
-  "PASSWORD_CHANGED_SUCCESSFULLY": "Password changed successfully!",
-  "INCORRECT_CURRENT_PASSWORD": "Current password incorrect",
-  "SELECT_LANGUAGE": "Select Language"
+  "INCORRECT_LOGIN": "錯誤的郵箱帳號或密碼",
+  "USER_EXISTED": "註冊的電子郵件!",
+  "INVALID_EMAIL": "請輸入有效的電子郵件地址",
+  "PASSWORDS_NOT_MATCH": "密碼不匹配",
+  "PASSWORD_CHANGED_SUCCESSFULLY": "密碼更換成功！",
+  "INCORRECT_CURRENT_PASSWORD": "當前密碼不正確",
+  "SELECT_LANGUAGE": "選擇語言"
 }

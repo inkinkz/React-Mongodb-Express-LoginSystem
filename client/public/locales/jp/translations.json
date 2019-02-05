@@ -25,5 +25,12 @@
   "NAME": "名前",
   "ENTER_NAME": "あなたの名前を入力してください",
   "PASSWORD_AGAIN": "パスワードを再入力してください",
-  "CHANGE_PASSWORD": "パスワードを変更する"
+  "CHANGE_PASSWORD": "パスワードを変更する",
+  "INCORRECT_LOGIN": "間違ったメールアドレスまたはパスワード!",
+  "USER_EXISTED": "すでに登録されたメール！！",
+  "INVALID_EMAIL": "有効なメールアドレスを入力してください",
+  "PASSWORDS_NOT_MATCH": "パスワードが一致していません",
+  "PASSWORD_CHANGED_SUCCESSFULLY": "パスワードは正常に変更されました！",
+  "INCORRECT_CURRENT_PASSWORD": "現在のパスワードが正しくありません",
+  "SELECT_LANGUAGE": "言語を選択する"
 }

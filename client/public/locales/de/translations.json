@@ -25,5 +25,12 @@
   "NAME": "Name",
   "ENTER_NAME": "Gibt deinen Namen ein",
   "PASSWORD_AGAIN": "Wiederhole das Passwort",
-  "CHANGE_PASSWORD": "Ändere das Passwort"
+  "CHANGE_PASSWORD": "Ändere das Passwort",
+  "INCORRECT_LOGIN": "Falsche Email oder Passwort!",
+  "USER_EXISTED": "Email schon registriert!",
+  "INVALID_EMAIL": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+  "PASSWORDS_NOT_MATCH": "Passwörter stimmen nicht überein",
+  "PASSWORD_CHANGED_SUCCESSFULLY": "Das Passwort wurde erfolgreich geändert!",
+  "INCORRECT_CURRENT_PASSWORD": "Das aktuelle Passwort ist falsch",
+  "SELECT_LANGUAGE": "Sprache auswählen"
 }

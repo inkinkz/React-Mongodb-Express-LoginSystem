@@ -141,8 +141,7 @@ input [type="name"]:focus {
 }
 
 .errorMessage {
-  /* border: 5px solid red; */
-  font-size: 14px;
+  font-size: 16px;
   color: red;
 }
 
@@ -150,21 +149,9 @@ input [type="name"]:focus {
   display: none;
 }
 
-/* .registerbtn:hover {
-  background-color: rgb(199, 162, 80);
-} */
-
-/* .error-alert {
-  background-color: antiquewhite;
-  font-size: 20px;
-  color: rgb(133, 110, 53);
-  width: 70%;
-  border-radius: 6px;
-} */
-
 /* Selector */
-/* select {
-  width: 15%;
+select {
+  width: 30%;
   padding: 16px;
   margin: 5px 0 22px 0;
   font-size: 14px;
@@ -172,4 +159,4 @@ input [type="name"]:focus {
   border: none;
   background: #e0d8c9;
   border-radius: 12px;
-} */
+}

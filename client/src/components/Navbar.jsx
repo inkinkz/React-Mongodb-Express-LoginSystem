@@ -10,7 +10,7 @@ class Navbar extends Component {
     console.log("logged out");
   }
   render() {
-    const { t, i18n } = this.props;
+    const { t } = this.props;
 
     var loggedIn = <li />;
     if (sessionStorage.getItem("name") !== null) {

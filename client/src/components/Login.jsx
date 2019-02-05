@@ -58,7 +58,7 @@ class Login extends Component {
   }
 
   render() {
-    const { t, i18n } = this.props;
+    const { t } = this.props;
     if (this.state.redirect) {
       return <Redirect to={{ pathname: this.state.redirect }} />;
     } else {

@@ -25,5 +25,12 @@
   "NAME": "이름",
   "ENTER_NAME": "당신의 이름을 입력",
   "PASSWORD_AGAIN": "반복 암호",
-  "CHANGE_PASSWORD": "비밀번호 변경"
+  "CHANGE_PASSWORD": "비밀번호 변경",
+  "INCORRECT_LOGIN": "잘못된 이메일 또는 비밀번호!",
+  "USER_EXISTED": "이미 등록 된 이메일!",
+  "INVALID_EMAIL": "유효한 이메일 주소를 입력하세요",
+  "PASSWORDS_NOT_MATCH": "비밀번호가 일치하지 않습니다",
+  "PASSWORD_CHANGED_SUCCESSFULLY": "암호가 성공적으로 변경되었습니다!",
+  "INCORRECT_CURRENT_PASSWORD": "현재 비밀번호가 잘못되었습니다.",
+  "SELECT_LANGUAGE": "언어 선택"
 }

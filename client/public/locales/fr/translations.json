@@ -25,5 +25,12 @@
   "NAME": "prénom",
   "ENTER_NAME": "Entrez votre nom",
   "PASSWORD_AGAIN": "Répéter le mot de passe",
-  "CHANGE_PASSWORD": "Changer le mot de passe"
+  "CHANGE_PASSWORD": "Changer le mot de passe",
+  "INCORRECT_LOGIN": "Email ou mot de passe incorrect!",
+  "USER_EXISTED": "Email déjà enregistré !!",
+  "INVALID_EMAIL": "S'il vous plaît, mettez une adresse email valide",
+  "PASSWORDS_NOT_MATCH": "Les mots de passe ne correspondent pas",
+  "PASSWORD_CHANGED_SUCCESSFULLY": "Le mot de passe a été changé avec succès!",
+  "INCORRECT_CURRENT_PASSWORD": "Mot de passe actuel incorrect",
+  "SELECT_LANGUAGE": "Choisir la langue"
 }
