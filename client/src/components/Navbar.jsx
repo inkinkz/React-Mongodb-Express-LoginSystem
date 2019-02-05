@@ -5,7 +5,7 @@ import { translate } from "react-i18next";
 class Navbar extends Component {
   logOut(e) {
     e.preventDefault();
-    sessionStorage.clear();
+    localStorage.clear();
     this.props.history.push(`/users/login`);
     console.log("logged out");
   }
@@ -16,16 +16,16 @@ class Navbar extends Component {
       var selectedLanguage = document.getElementById("langselector").value;
       if (selectedLanguage.length === 2) {
         i18n.changeLanguage(selectedLanguage);
-        sessionStorage.setItem("selectedLanguage", selectedLanguage);
+        localStorage.setItem("selectedLanguage", selectedLanguage);
       }
     };
 
     var loggedIn = <li />;
-    if (sessionStorage.getItem("name") !== null) {
+    if (localStorage.getItem("name") !== null) {
       loggedIn = (
         <div>
           <li>
-            <Link to="#">{`${t("GREETING")} ${sessionStorage.getItem(
+            <Link to="#">{`${t("GREETING")} ${localStorage.getItem(
               "name"
             )}`}</Link>
           </li>
@@ -56,7 +56,7 @@ class Navbar extends Component {
           <li className="active">
             <Link to="/">Fancy App</Link>
           </li>
-          {sessionStorage.name ? loggedIn : loginRegLink}
+          {localStorage.name ? loggedIn : loginRegLink}
           <select
             align="center"
             id="langselector"

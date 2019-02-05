@@ -16,7 +16,7 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentDidMount() {
-    if (sessionStorage.getItem("name") === null) {
+    if (localStorage.getItem("name") === null) {
     } else {
       this.setState({
         redirect: "/users/member"
@@ -40,9 +40,9 @@ class Login extends Component {
         console.log("res >>>>>>" + res);
         console.log(res.data.name);
         if (res.status === 200) {
-          sessionStorage.setItem("user", res.data);
-          sessionStorage.setItem("name", res.data.name);
-          sessionStorage.setItem("email", res.data.email);
+          localStorage.setItem("user", res.data);
+          localStorage.setItem("name", res.data.name);
+          localStorage.setItem("email", res.data.email);
           // update the state to redirect to home
           this.setState({
             redirect: "/users/member"

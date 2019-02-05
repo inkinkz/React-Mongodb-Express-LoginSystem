@@ -22,15 +22,15 @@ class Member extends Component {
   }
 
   componentDidMount() {
-    if (sessionStorage.getItem("name") === null) {
+    if (localStorage.getItem("name") === null) {
       // this.props.history.push("/users/login");
       this.setState({
         redirect: "/users/login"
       });
     } else {
       this.setState({
-        name: sessionStorage.getItem("name"),
-        email: sessionStorage.getItem("email")
+        name: localStorage.getItem("name"),
+        email: localStorage.getItem("email")
       });
     }
   }
@@ -78,7 +78,7 @@ class Member extends Component {
     console.log("onPasswordChange called");
     axios
       .post("member", {
-        user: sessionStorage.getItem("user"),
+        user: localStorage.getItem("user"),
         currentPassword: this.state.currentPassword,
         password: this.state.password,
         type: "changePassword"
@@ -104,14 +104,14 @@ class Member extends Component {
     e.preventDefault();
     axios
       .post("member", {
-        user: sessionStorage.getItem("user"),
+        user: localStorage.getItem("user"),
         type: "delete"
       })
       .then(res => {
         console.log(res);
         if (res.data === "deleted") {
           alert("Account Deleted Successfully!");
-          sessionStorage.clear();
+          localStorage.clear();
           this.setState({
             redirect: "/"
           });

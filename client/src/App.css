@@ -152,12 +152,9 @@ input [type="name"]:focus {
 /* Selector */
 select {
   width: 15%;
-  /* padding: 16px; */
   margin: 16px 10px;
-  /* margin: 12px 0 22px 0; */
   font-size: 14px;
   float: right;
-  /* display: inline-block; */
   background: #e0d8c9;
   border-radius: 12px;
 }
