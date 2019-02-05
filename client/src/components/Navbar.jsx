@@ -1,26 +1,31 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { translate } from "react-i18next";
 
 class Navbar extends Component {
   logOut(e) {
     e.preventDefault();
     sessionStorage.clear();
-    this.props.history.push(`/`);
+    this.props.history.push(`/users/login`);
     console.log("logged out");
   }
   render() {
+    const { t, i18n } = this.props;
+
     var loggedIn = <li />;
     if (sessionStorage.getItem("name") !== null) {
       loggedIn = (
         <div>
           <li>
-            <Link to="#">{`Hi, ${sessionStorage.getItem("name")}`}</Link>
+            <Link to="#">{`${t("GREETING")} ${sessionStorage.getItem(
+              "name"
+            )}`}</Link>
           </li>
           <li>
-            <Link to="/users/member">Member</Link>
+            <Link to="/users/member">{t("MEMBER")}</Link>
           </li>
           <li onClick={this.logOut.bind(this)}>
-            <Link to="#">Logout</Link>
+            <Link to="#">{t("LOGOUT")}</Link>
           </li>
         </div>
       );
@@ -29,10 +34,10 @@ class Navbar extends Component {
     const loginRegLink = (
       <div>
         <li>
-          <Link to="/users/login">Login</Link>
+          <Link to="/users/login">{t("LOGIN")}</Link>
         </li>
         <li>
-          <Link to="/users/register">Register</Link>
+          <Link to="/users/register">{t("REGISTER")}</Link>
         </li>
       </div>
     );
@@ -50,4 +55,4 @@ class Navbar extends Component {
   }
 }
 
-export default withRouter(Navbar);
+export default translate("translations")(withRouter(Navbar));

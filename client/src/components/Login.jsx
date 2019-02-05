@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import { translate } from "react-i18next";
 
 class Login extends Component {
   failed = false;
@@ -57,6 +58,7 @@ class Login extends Component {
   }
 
   render() {
+    const { t, i18n } = this.props;
     if (this.state.redirect) {
       return <Redirect to={{ pathname: this.state.redirect }} />;
     } else {
@@ -64,31 +66,31 @@ class Login extends Component {
         <form onSubmit={this.onSubmit}>
           <div className="container">
             <p className={`errorMessage ${!this.failed ? "hidden" : ""}`}>
-              Incorrect email or password!
+              {t("INCORRECT_LOGIN")}
             </p>
-            <h1 className="font-mukta">Login</h1>
-            <p className="font-mukta">Enter your Email and Password</p>
+            <h1 className="font-mukta">{t("LOGIN")}</h1>
+            <p className="font-mukta">{t("LOGIN_ENTER_EMAIL")}</p>
             <label htmlFor="email">
-              <b className="font-mukta">Email</b>
+              <b className="font-mukta">{t("EMAIL")}</b>
               <br />
             </label>
             <input
               className="font-mukta"
               type="text"
-              placeholder="Enter your Email"
+              placeholder={t("ENTER_EMAIL")}
               name="email"
               value={this.state.email}
               onChange={this.onChange}
             />
             <br />
             <label htmlFor="password">
-              <b className="font-mukta">Password</b>
+              <b className="font-mukta">{t("PASSWORD")}</b>
               <br />
             </label>
             <input
               className="font-mukta"
               type="password"
-              placeholder="Enter your Password"
+              placeholder={t("ENTER_PASSWORD")}
               name="password"
               value={this.state.password}
               onChange={this.onChange}
@@ -99,7 +101,7 @@ class Login extends Component {
               type="submit"
               name="submit"
             >
-              Login
+              {t("LOGIN")}
             </button>
           </div>
         </form>
@@ -108,4 +110,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default translate("translations")(Login);

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { translate } from "react-i18next";
 
 class Member extends Component {
   isMatch = false;
@@ -117,64 +118,67 @@ class Member extends Component {
   }
 
   render() {
+    const { t, i18n } = this.props;
     return (
       <div>
         <form onSubmit={this.onPasswordChange}>
           <div className="container">
-            <h1 className="font-mukta">{`Hi, ${this.state.name}`}</h1>
-            <h3 className="font-mukta">{`Email: ${this.state.email}`}</h3>
+            <h1 className="font-mukta">{`${t("GREETING")} ${
+              this.state.name
+            }`}</h1>
+            <h4 className="font-mukta">{`Email: ${this.state.email}`}</h4>
             <p
               id="isChanged"
               className={`errorMessage ${!this.isChanged ? "hidden" : ""}`}
             >
-              Password changed successfully!!
+              {t("PASSWORDS_CHANGED_SUCCESSFULLY")}
             </p>
             <p
               id="notMatched"
               className={`errorMessage ${!this.notMatched ? "hidden" : ""}`}
             >
-              Incorrect current password!!
+              {t("INCORRECT_CURRENT_PASSWORD")}
             </p>
-            <h1 className="font-mukta">Change Password</h1>
-            <p className="font-mukta">Enter your new password below.</p>
+            <h1 className="font-mukta">{t("CHANGE_PASSWORD")}</h1>
+            <p className="font-mukta">{t("ENTER_NEW_PASSWORD")}.</p>
             <label htmlFor="currentPassword">
-              <b className="font-mukta">Current Password</b>
+              <b className="font-mukta">{t("CURRENT_PASSWORD")}</b>
               <br />
             </label>
             <input
               className="font-mukta"
               type="password"
-              placeholder="Enter Current Password"
+              placeholder={t("ENTER_CURRENT_PASSWORD")}
               name="currentPassword"
               onChange={this.onChange}
             />
             <br />
             <label htmlFor="password">
-              <b className="font-mukta">New Password</b>
+              <b className="font-mukta">{t("NEW_PASSWORD")}</b>
               <br />
             </label>
             <input
               className="font-mukta"
               type="password"
-              placeholder="Enter New Password"
+              placeholder={t("ENTER_NEW_PASSWORD")}
               name="password"
               onChange={this.onChange}
             />
             <br />
             <label htmlFor="password2">
-              <b className="font-mukta">Confirm new password</b>
+              <b className="font-mukta">{t("ENTER_NEW_PASSWORD")}</b>
               <br />
             </label>
             <p
               id="pwError"
               className={`errorMessage ${!this.isMatch ? "hidden" : ""}`}
             >
-              Passwords do not match.
+              {t("PASSWORDS_NOT_MATCH")}
             </p>
             <input
               className="font-mukta"
               type="password"
-              placeholder="Enter your new password again"
+              placeholder={t("CONFIRM_NEW_PASSWORD")}
               name="password2"
               onChange={this.onChange}
             />
@@ -184,7 +188,7 @@ class Member extends Component {
               name="changePw"
               disabled={!this.isEnabled}
             >
-              Register
+              {t("CHANGE_PASSWORD")}
             </button>
             <br />
             <br />
@@ -193,16 +197,14 @@ class Member extends Component {
         </form>
         <form onSubmit={this.onDelete}>
           <div className="container">
-            <h1 className="font-mukta">Delete Account</h1>
-            <p className="font-mukta">
-              Once account is deleted, it cannot be undone.
-            </p>
+            <h1 className="font-mukta">{t("DELETE_ACCOUNT")}</h1>
+            <p className="font-mukta">{t("DELETE_ACCOUNT_MESSAGE")} </p>
             <button
               className="font-mukta registerbtn"
               type="submit"
               name="deleteAcc"
             >
-              DELETE ACCOUNT
+              {t("DELETE_ACCOUNT")}{" "}
             </button>
           </div>
         </form>
@@ -211,4 +213,4 @@ class Member extends Component {
   }
 }
 
-export default Member;
+export default translate("translations")(Member);

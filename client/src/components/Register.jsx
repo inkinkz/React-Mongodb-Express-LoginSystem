@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { translate } from "react-i18next";
 
 class Register extends Component {
   isEnabled = false;
@@ -104,30 +105,32 @@ class Register extends Component {
   }
 
   render() {
+    const { t, i18n } = this.props;
+
     return (
       <div className="container">
         <form onSubmit={this.onSubmit}>
           <div>
             <p className={`errorMessage ${!this.userExisted ? "hidden" : ""}`}>
-              ERROR: User existed !
+              {t("USER_EXISTED")}
             </p>
-            <h1 className="font-mukta">Register</h1>
-            <p className="font-mukta">Fill the form below to register.</p>
+            <h1 className="font-mukta">{t("REGISTER")}</h1>
+            <p className="font-mukta">{t("FILL_FORM_MESSAGE")}</p>
             <label htmlFor="name">
-              <b className="font-mukta">Name</b>
+              <b className="font-mukta">{t("NAME")}</b>
               <br />
             </label>
             <input
               className="font-mukta"
               type="text"
-              placeholder="#{translation.ENTER_NAME}"
+              placeholder={t("ENTER_NAME")}
               name="name"
               value={this.state.name}
               onChange={this.onChange}
             />
             <br />
             <label htmlFor="email">
-              <b className="font-mukta">Email</b>
+              <b className="font-mukta">{t("EMAIL")}</b>
               <br />
             </label>
             <div>
@@ -135,33 +138,33 @@ class Register extends Component {
                 id="emailError"
                 className={`errorMessage ${!this.emailError ? "hidden" : ""}`}
               >
-                Please enter a valid email address.
+                {t("INVALID_EMAIL")}
               </p>
             </div>
             <input
               className="font-mukta"
               type="text"
-              placeholder="#{translation.ENTER_EMAIL}"
+              placeholder={t("ENTER_EMAIL")}
               name="email"
               value={this.state.email}
               onChange={this.onChange}
             />
             <br />
             <label htmlFor="password">
-              <b className="font-mukta">Password</b>
+              <b className="font-mukta">{t("PASSWORD")}</b>
               <br />
             </label>
             <input
               className="font-mukta"
               type="password"
-              placeholder="#{translation.ENTER_PASSWORD}"
+              placeholder={t("ENTER_PASSWORD")}
               name="password"
               value={this.state.password}
               onChange={this.onChange}
             />
             <br />
             <label htmlFor="password2">
-              <b className="font-mukta">Confirm your Password</b>
+              <b className="font-mukta">{t("CONFIRM_PASSWORD")}</b>
               <br />
             </label>
             <div>
@@ -169,13 +172,13 @@ class Register extends Component {
                 id="pwError"
                 className={`errorMessage ${!this.pwError ? "hidden" : ""}`}
               >
-                Passwords not match.
+                {t("PASSWORDS_NOT_MATCH")}
               </p>
             </div>
             <input
               className="font-mukta"
               type="password"
-              placeholder="#{translation.PASSWORD_AGAIN}"
+              placeholder={t("PASSWORD_AGAIN")}
               name="password2"
               value={this.state.password2}
               onChange={this.onChange}
@@ -186,7 +189,7 @@ class Register extends Component {
               name="submit"
               disabled={!this.isEnabled}
             >
-              Register
+              {t("REGISTER")}
             </button>
           </div>
         </form>
@@ -195,4 +198,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default translate("translations")(Register);
