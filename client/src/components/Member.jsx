@@ -22,8 +22,7 @@ class Member extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem("name") === null) {
-      // this.props.history.push("/users/login");
+    if (localStorage.getItem("email") === null) {
       this.setState({
         redirect: "/users/login"
       });
@@ -148,7 +147,7 @@ class Member extends Component {
                 {t("INCORRECT_CURRENT_PASSWORD")}
               </p>
               <h1 className="font-mukta">{t("CHANGE_PASSWORD")}</h1>
-              <p className="font-mukta">{t("ENTER_NEW_PASSWORD")}.</p>
+              <h3 className="font-mukta">{t("ENTER_NEW_PASSWORD_BELOW")}</h3>
               <label htmlFor="currentPassword">
                 <b className="font-mukta">{t("CURRENT_PASSWORD")}</b>
                 <br />

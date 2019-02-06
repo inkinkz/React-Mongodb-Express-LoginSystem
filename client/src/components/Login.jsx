@@ -16,7 +16,7 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentDidMount() {
-    if (localStorage.getItem("name") === null) {
+    if (localStorage.getItem("email") === null) {
     } else {
       this.setState({
         redirect: "/users/member"
@@ -36,9 +36,7 @@ class Login extends Component {
         password: this.state.password
       })
       .then(res => {
-        console.log("login response: ");
-        console.log("res >>>>>>" + res);
-        console.log(res.data.name);
+        console.log(res.data.name + " logged in");
         if (res.status === 200) {
           localStorage.setItem("user", res.data);
           localStorage.setItem("name", res.data.name);

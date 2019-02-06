@@ -67,7 +67,6 @@ class Register extends Component {
   }
 
   checkState() {
-    // console.log("state checked");
     if (
       this.state.name !== "" &&
       this.state.password2 !== "" &&

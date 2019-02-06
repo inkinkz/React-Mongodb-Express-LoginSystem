@@ -1,6 +1,5 @@
 const express = require("express");
 const users = express.Router();
-const cors = require("cors");
 const bcrypt = require("bcrypt");
 
 //Passport
@@ -8,26 +7,24 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 
 const User = require("../models/User");
-users.use(cors());
-
-process.env.SECRET_KEY = "secret";
 
 //Register new user
 users.post("/register", (req, res) => {
-  const userData = {
+  const newUser = {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password
   };
 
+  //If email is not already in database, create new user
   User.findOne({
     email: req.body.email
   })
     .then(user => {
       if (!user) {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
-          userData.password = hash;
-          User.create(userData)
+          newUser.password = hash;
+          User.create(newUser)
             .then(user => {
               res.json({ status: user.email + " registered!" });
             })
@@ -44,9 +41,9 @@ users.post("/register", (req, res) => {
     });
 });
 
-// Login Button
+// Login
 users.post("/login", passport.authenticate("local"), function(req, res) {
-  console.log("done called");
+  // console.log("done called");
   res.send(req.user);
 });
 
@@ -76,17 +73,14 @@ passport.use(
         if (err) throw err;
         if (!user) {
           console.log("unknown user");
-          // res.send("error: incorrect");
           return done(null, false, { message: "Incorrect Email!" });
         }
         User.comparePassword(password, user.password, function(err, isMatch) {
           if (err) return done(err);
           if (isMatch) {
-            // console.log("session:" + user);
             return done(null, user);
           } else {
             console.log("incorrect password");
-            // res.send("error: incorrect");
             return done(null, false, { message: "Incorrect Password!" });
           }
         });
@@ -105,12 +99,7 @@ users.post("/member", function(req, res) {
   } else if (req.body.type === "changePassword") {
     console.log("CHANGE PASSWORD");
     var currentPassword = req.body.currentPassword;
-
     var newPassword = req.body.password;
-
-    console.log("currentereqrqepas = " + req.user.password);
-    console.log("currentpw =" + currentPassword);
-    console.log("newp = " + newPassword);
 
     User.comparePassword(currentPassword, req.user.password, function(
       err,
@@ -123,7 +112,6 @@ users.post("/member", function(req, res) {
         User.changePassword(req.user, newPassword, function(err) {
           if (err) throw err;
         });
-
         res.send("password changed");
 
         // Current password incorrect

@@ -1,7 +1,7 @@
 {
   "name": "react-fancyapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "MERN Login App",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,19 +20,11 @@
   "dependencies": {
     "bcrypt": "^3.0.3",
     "body-parser": "~1.18.3",
-    "connect-flash": "*",
-    "cookie-parser": "^1.4.3",
-    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.0",
-    "express-messages": "*",
     "express-session": "^1.15.6",
-    "express-validator": "^5.3.1",
-    "http-errors": "~1.6.2",
-    "jsonwebtoken": "^7.4.2",
     "mongodb": "*",
     "mongoose": "*",
-    "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
     "passport": "^0.4.0",
     "passport-http": "*",

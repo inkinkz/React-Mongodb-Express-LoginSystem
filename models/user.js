@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 var bcrypt = require("bcrypt");
 
 // Connect to database
-mongoose.connect("mongodb://localhost/fancyapp");
+mongoose.connect("mongodb://localhost/fancyapp", { useNewUrlParser: true });
 
 var db = mongoose.connection;
 
