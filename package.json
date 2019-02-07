@@ -4,7 +4,7 @@
   "description": "MERN Login App",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha",
     "dev": "nodemon app.js"
   },
   "repository": {
@@ -29,5 +29,10 @@
     "passport": "^0.4.0",
     "passport-http": "*",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.4.2"
   }
 }

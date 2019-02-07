@@ -74,7 +74,6 @@ class Member extends Component {
 
   onPasswordChange(e) {
     e.preventDefault();
-    console.log("onPasswordChange called");
     axios
       .post("member", {
         user: localStorage.getItem("user"),
@@ -87,6 +86,8 @@ class Member extends Component {
         if (res.data === "password changed") {
           this.isChanged = true;
           this.notMatched = false;
+          document.getElementById("changePasswordForm").reset();
+
           this.props.history.push("/users/member");
         } else if (res.data === "current password not matched") {
           this.notMatched = true;
@@ -128,7 +129,7 @@ class Member extends Component {
     } else {
       return (
         <div>
-          <form onSubmit={this.onPasswordChange}>
+          <form id="changePasswordForm" onSubmit={this.onPasswordChange}>
             <div className="container">
               <h1 className="font-mukta">{`${t("GREETING")} ${
                 this.state.name

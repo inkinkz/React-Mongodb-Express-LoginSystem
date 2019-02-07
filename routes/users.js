@@ -72,16 +72,16 @@ passport.use(
       User.getUserByEmail(email, function(err, user) {
         if (err) throw err;
         if (!user) {
-          console.log("unknown user");
-          return done(null, false, { message: "Incorrect Email!" });
+          // console.log("unknown user");
+          return done(null, false);
         }
         User.comparePassword(password, user.password, function(err, isMatch) {
           if (err) return done(err);
           if (isMatch) {
             return done(null, user);
           } else {
-            console.log("incorrect password");
-            return done(null, false, { message: "Incorrect Password!" });
+            // console.log("incorrect password");
+            return done(null, false);
           }
         });
       });

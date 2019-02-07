@@ -18,8 +18,6 @@ app.use(
   })
 );
 
-var port = process.env.PORT || 5000;
-
 app.use(express.json());
 app.use(
   bodyParser.urlencoded({
@@ -34,8 +32,12 @@ var Users = require("./routes/Users");
 
 app.use("/users", Users);
 
+// var port = process.env.PORT || 5000;
+var port = 5000;
+
 app.listen(port, () => {
-  console.log("Server is running on port: " + port);
+  //Check if running properly
+  // console.log("Server is running on port: " + port);
 });
 
 module.exports = app;
