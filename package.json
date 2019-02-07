@@ -4,8 +4,8 @@
   "description": "MERN Login App",
   "main": "app.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha",
-    "dev": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "./node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -18,13 +18,13 @@
   },
   "homepage": "https://github.com/inkinkz/react-fancyapp#readme",
   "dependencies": {
-    "bcrypt": "^3.0.3",
+    "bcrypt": "^3.0.4",
     "body-parser": "~1.18.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "express-session": "^1.15.6",
-    "mongodb": "*",
-    "mongoose": "*",
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.10",
     "nodemon": "^1.18.9",
     "passport": "^0.4.0",
     "passport-http": "*",
