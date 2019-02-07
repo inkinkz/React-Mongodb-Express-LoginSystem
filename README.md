@@ -14,7 +14,7 @@ MongoDB Express React Node Login System
 
 5. In `/react-fancyapp` directory, start the server
 
-		> npm run dev
+		> npm start
     
 6. In `/react-fancyapp/client` directory
 
