@@ -8,7 +8,7 @@ MongoDB Express React Node Login System
 		
 		> npm install
 		
-4. start MongoDB.
+4. Start MongoDB.
 
 		> mongod
 
