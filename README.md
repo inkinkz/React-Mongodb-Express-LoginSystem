@@ -1,4 +1,4 @@
-# React - Fancy App
+# Login System
 MongoDB Express React Node Login System
 
 ## Installation & Setup
